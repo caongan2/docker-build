@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  mysql:
+    container_name: laravel-mysql
+    image: mysql:latest
+    ports:
+        - 3306:3306
+    environment:
+        MYSQL_DATABASE: database
+        MYSQL_ROOT_PASSWORD: pass
+    volumes:
+        - mysql_data:/var/lib/mysql
+  app:
+    container_name: test_app
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    depends_on:
+      - mysql
+    environment:
+      WEB_DOCUMENT_ROOT: /var/www/html/
+    volumes:
+      - app_storage:/var/www/html/storage
+    ports:
+      - 8888:80
+  app-phpmyadmin:
+      build:
+          context: .
+          dockerfile: Dockerfile-phpmyadmin
+      ports:
+          -   8880:80
+      environment:
+          PMA_HOST: mysql
+          PMA_PORT: 3306
+volumes:
+  mysql_data:
+  app_storage:
