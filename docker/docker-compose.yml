@@ -25,7 +25,7 @@ services:
           PMA_HOST: docker_mysql
           PMA_PORT: 3307
       networks:
-      - mynetwork
+        - mynetwork
   app:
     container_name: test_app
     build:
