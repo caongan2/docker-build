@@ -11,8 +11,8 @@ services:
         MYSQL_ROOT_PASSWORD: pass
     volumes:
         - mysql_data:/var/lib/mysql
-    # networks:
-      # - mynetwork
+    networks:
+      - mynetwork
   app-phpmyadmin:
       build:
           context: .
@@ -35,8 +35,8 @@ services:
       - app_storage:/var/www/html/storage
     ports:
       - 8888:80
-    # networks:
-      # - mynetwork
+    networks:
+      - mynetwork
 volumes:
   mysql_data:
   app_storage:
