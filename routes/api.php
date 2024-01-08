@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/index', [UserController::class, 'index']);
-Route::get('/delete/{id}', [UserController::class, 'delete']);
-Route::post('/store', [UserController::class, 'storeContact']);
+Route::get('/index', [ContactController::class, 'index']);
+Route::get('/delete/{id}', [ContactController::class, 'delete']);
+Route::post('/store', [ContactController::class, 'storeContact']);
+Route::get('/show/{id}', [ContactController::class, 'show']);

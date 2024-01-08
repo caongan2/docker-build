@@ -32,7 +32,7 @@ class UserController extends Controller
         if($contact) {
             return response()->json(['message' => 'Add contact successfully']);
         } else {
-            return response()->json(['message' => 'Add contact falled']);
+            return response()->json(['message' => 'Add contact failed']);
         }
         
     }

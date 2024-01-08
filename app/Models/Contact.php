@@ -11,6 +11,19 @@ class Contact extends Model
 
     protected $table = 'contacts';
     protected $fillable = [
-        'email', 'phone'
+        'email', 'phone', 'name'
     ];
+
+    /** Lọc theo name product
+     * @param $query
+     * @param $name
+     * @return mixed
+     */
+    public function scopeName($query, $name)
+    {
+        if ($name) {
+            return $query->where('name', 'Like', '%'.$name.'%');
+        }else
+            return $query;
+    }
 }
