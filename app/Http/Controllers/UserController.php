@@ -15,25 +15,16 @@ class UserController extends Controller
         return response()->json(UserResource::collection($users));
     }
 
-    public function delete($id) {
-        $user = User::find($id);
-        $userCount = User::count();
-        if ($user) {
-            $user->delete();
-            return response()->json(['message' => 'User deleted successfully', 'count' => $userCount]);
-        } else {
-            return response()->json(['error' => 'User not found'], 404);
-        }
-    }
-    
-    public function storeContact(Request $request) {
-        $contact = Contact::create($request->all());
+    public function store(Request $request) {
+        $data = $request->only('name', 'email', 'password');
+        $data['password'] = bcrypt($data['password']);
 
-        if($contact) {
+        $user = User::create($data);
+
+        if($user) {
             return response()->json(['message' => 'Add contact successfully']);
         } else {
             return response()->json(['message' => 'Add contact failed']);
         }
-        
     }
 }

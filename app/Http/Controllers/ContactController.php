@@ -40,7 +40,7 @@ class ContactController extends Controller
         $contact = Contact::find($id);
 
         if($contact) {
-            return response()->json(['status' => 'success', 'data' => new ContactResource($contact)]);
+            return response()->json(['status' => 'success', 'data' => ContactResource::make($contact)]);
         }
         
         return response()->json(['message' => "Contact doesn't exist"]);
